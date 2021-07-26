@@ -21,7 +21,7 @@ Using these assumptions, we can easily see that this miniworld has enough comple
 | ----------- | ----------- | ----------- | ----------- |
 | Student_ID | Simple, Not NULL | Single-valued | Int (key Attribute) |
 | Name | Simple, Not NULL | Single-valued | String |
-| Phone | Simple | Single-valued | Int | TODO: String?
+| Phone | Simple | Single-valued | String |
 | Address | Composite<br>(Street Number: int[1,10000],<br>Street Name: Str, Suburb: Str) | Multi-valued | String |
 | Course | Simple | Multi-valued | String | TODO: By reference?
 | Enrollment_Date | Simple, Not NULL | Single-valued | Date |
@@ -72,7 +72,7 @@ Using these assumptions, we can easily see that this miniworld has enough comple
 | Attribute   | Simplicity  | Num-Values  | Data Type   |
 | ----------- | ----------- | ----------- | ----------- |
 | Name | Single-valued | Single-valued | String (Key Attribute) |
-| Main_Office_Address | Derived<br>(from Building references) | Single-valued | String |
+| Main_Office_Address | Single-valued | Single-valued | String |
 | Phone | Simple | Single-valued | String (Candidate Key) |
 | Email | Simple | Single-valued | String (Candidate Key) |
 
@@ -155,13 +155,7 @@ Using these assumptions, we can easily see that this miniworld has enough comple
   - Staff can supervise many students, and students can have multiple
     supervisors.
   - Both are partial
-  - Staff don’t always supervise students , and not all students need supervisors
-
-- ### LOCAL_TO(Staff, Campus)
-  - 1:N for Campus:Staff
-  - Staff are located on a campus, but one campus can have many staff
-  - Staff has total participation, Campus has partial participation
-  - Multiple staff may share the same campus, but they must have at least one campus.
+  - Staff don’t always supervise students , and not all students need supervisors.
 
 - ### COORDINATES(Staff, Course)
   - 1:1 for Staff:Course
