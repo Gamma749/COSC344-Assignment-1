@@ -33,20 +33,20 @@ Using these assumptions, we can easily see that this miniworld has enough comple
 | ----------- | ----------- | ----------- | ----------- |
 | Staff_ID | Simple, Not NULL | Single-valued | Int (Key Attribute) |
 | Name | Simple, Not NULL | Single-valued | String |
-| Phone | Simple | Single-valued | Int | #TODO: As String?
+| Phone | Simple | Single-valued | String |
 | Address | Composite<br>(Street Number: int[1,10000],<br>Street Name: Str, Suburb: Str) | Multi-valued | String |
-| Student_ID | Simple | Single-value | Int | #TODO: From reference?
-| Departments | Simple | Multi-valued | String | #TODO: From reference?
-| Papers | Simple | Multi-valued | String |  #TODO: From reference?
-| Salary | Simple, Not NULL | Sinle-valued| Float |
+| Student_ID | Derived<br>(From Student Reference) | Single-value | Int | #TODO: From reference?
+| Departments | Derived<br>(From Department Reference) | Multi-valued | String | #TODO: From reference?
+| Papers | Simple | Derived<br>(From Papers Reference) | String |  #TODO: From reference?
+| Salary | Simple, Not NULL | Single-valued | Float |
 | IRD_Num | Simple, not NULL | Single-valued | Int |
-| Office | Simple | Single-valued | String |  #TODO: From reference?
+| Office | Simple | Derived<br>(From Room Reference) | String |  #TODO: From reference?
 
 - ### Department
 | Attribute   | Simplicity  | Num-Values  | Data Type   |
 | ----------- | ----------- | ----------- | ----------- |
 | Name | Simple | Single-valued | String (Key Attribute)|
-| Campus | Simple | Multi-valued | String | #TODO: From Reference?
+| Campus | Simple | Derived<br>(From Campus Reference) | String | #TODO: From Reference?
 | Number_of_Employees | Composite<br>(Number_of_lecturers: int,<br> Number_of_administrative_staff: int,<br> Number_of_tutors:int) | Single-valued | int |
 | Number_of_Students | Derived<br>(from Student references) | Single-valued | int |
 | Address | Derived<br>(from Building references) | Multi-valued | String |
@@ -58,12 +58,23 @@ Using these assumptions, we can easily see that this miniworld has enough comple
 | Years_required | Simple | Single-valued | int |
 | Undergraduate | Simple | Single-valued | boolean |
 | Postgraduate | Simple | Single-valued | boolean |
-| Course_coordinator | Simple | Single-valued | String | #TODO: From reference?
+| Course_coordinator | Derived<br>(From Staff Reference) | Single-valued | String | #TODO: From reference?
 | Number_of_Students | Derived<br>(from Student references) | Single-valued | int |
 
 - ### Paper
+| Attribute   | Simplicity  | Num-Values  | Data Type   |
+| ----------- | ----------- | ----------- | ----------- |
+| Paper_Code | Simple | Single-valued | String (Key Attribute) |
+| Semester | Simple | Multi-valued | String (Enumerated) |
+| Points | Simple | Single-valued | Int |  
 
 - ### Campus
+| Attribute   | Simplicity  | Num-Values  | Data Type   |
+| ----------- | ----------- | ----------- | ----------- |
+| Name | Single-valued | Single-valued | String (Key Attribute) |
+| Main_Office_Address | Derived<br>(from Building references) | Single-valued | String |
+| Phone | Simple | Single-valued | String (Candidate Key) |
+| Email | Simple | Single-valued | String (Candidate Key) |
 
 - ### Building
 | Attribute   | Simplicity  | Num-Values  | Data Type   |
@@ -157,6 +168,36 @@ Using these assumptions, we can easily see that this miniworld has enough comple
   - A course must have one coordinator and staff can coordinate only one course
   - Staff has partial participation, course has total participation
 
+- ### TEACHES (Staff, Paper)
+  - N:M for Staff:Paper
+  - Many staff members can teach one paper, and one staff member can teach many papers
+  - Staff is partial, Paper is total
+
+- ### OFFERED_AT (Paper, Campus)
+  - N:M for Paper:Campus
+  - A campus can offer many papers, and a paper can be offered at many campuses
+  - Paper and Campus are total, a campus must offer a paper and a paper must be offered at a campus
+
+- ### TAKES (Student, Paper)
+  - N:M for Student:Paper
+  - A student can take many papers, and a paper can be taken by many students
+  - Student is total participation, paper is partial participation
+  - An unpopular paper may have no students
+
+- ### DEAN_OF (Staff, Campus)
+  - 1:1 for Staff:Campus
+  - A campus can have one dean, and a staff member can only be the dean on one campus
+  - Total participation for campus, partial participation for staff
+  - A campus needs a dean but a staff member doesn't need to be the dean
+
+- ### STUDENT_AT (Student, Campus)
+  - 1:N For Campus:Student, a campus can have many students but a student can only be enrolled at one campus
+  - Student has total participation (they must be at a campus) and campus has partial participation (a campus may have no students)
+
+- ### STAFF_AT (Staff, Campus)
+  - 1:N For Campus:Staff, a campus can have many staff but a staff member can only be at one campus
+  - Staff has total participation (they must be at a campus) and campus has total participation (it must be staffed by someone)
+
 ## Teamwork Summary
 - ### Hayden McAlister
   - Modeling of Building and Room, as well as associated Relationships
@@ -168,6 +209,9 @@ Using these assumptions, we can easily see that this miniworld has enough comple
   - Addition of above working to report
 
 - ### Masaaki Fukushima
+  - Modeling of Paper, Campus and associated relationships
+  - Addition of above working to report
+
 - ### Jack Heikell 
   - Modeling of Student, Staff, and associated relationships
   - Addition of above working to report
