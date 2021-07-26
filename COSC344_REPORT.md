@@ -19,16 +19,35 @@ Using these assumptions, we can easily see that this miniworld has enough comple
 - ### Student
 | Attribute   | Simplicity  | Num-Values  | Data Type   |
 | ----------- | ----------- | ----------- | ----------- |
-|             |             |             |             |
-|             |             |             |             |
+| Student_ID | Simple, Not NULL | Single-valued | Int (key Attribute) |
+| Name | Simple, Not NULL | Single-valued | String |
+| Phone | Simple | Single-valued | Int | TODO: String?
+| Address | Composite<br>(Street Number: int[1,10000],<br>Street Name: Str, Suburb: Str) | Multi-valued | String |
+| Course | Simple | Multi-valued | String | TODO: By reference?
+| Enrollment_Date | Simple, Not NULL | Single-valued | Date |
+| Graduate_Date | Simple | Single-valued | Date |
+| Graduated_bool | Derived<br>(From existence of Graduate_Date) | Single-valued
+| Boolean |
 
 - ### Staff
+| Attribute   | Simplicity  | Num-Values  | Data Type   |
+| ----------- | ----------- | ----------- | ----------- |
+| Staff_ID | Simple, Not NULL | Single-valued | Int (Key Attribute) |
+| Name | Simple, Not NULL | Single-valued | String |
+| Phone | Simple | Single-valued | Int | #TODO: As String?
+| Address | Composite<br>(Street Number: int[1,10000],<br>Street Name: Str, Suburb: Str) | Multi-valued | String |
+| Student_ID | Simple | Single-value | Int | #TODO: From reference?
+| Departments | Simple | Multi-valued | String | #TODO: From reference?
+| Papers | Simple | Multi-valued | String |  #TODO: From reference?
+| Salary | Simple, Not NULL | Sinle-valued| Float |
+| IRD_Num | Simple, not NULL | Single-valued | Int |
+| Office | Simple | Single-valued | String |  #TODO: From reference?
 
 - ### Department
 | Attribute   | Simplicity  | Num-Values  | Data Type   |
 | ----------- | ----------- | ----------- | ----------- |
 | Name | Simple | Single-valued | String (Key Attribute)|
-| Campus | Simple | Multi-valued | String |
+| Campus | Simple | Multi-valued | String | #TODO: From Reference?
 | Number_of_Employees | Composite<br>(Number_of_lecturers: int,<br> Number_of_administrative_staff: int,<br> Number_of_tutors:int) | Single-valued | int |
 | Number_of_Students | Derived<br>(from Student references) | Single-valued | int |
 | Address | Derived<br>(from Building references) | Multi-valued | String |
@@ -40,7 +59,7 @@ Using these assumptions, we can easily see that this miniworld has enough comple
 | Years_required | Simple | Single-valued | int |
 | Undergraduate | Simple | Single-valued | boolean |
 | Postgraduate | Simple | Single-valued | boolean |
-| Course_coordinator | Simple | Single-valued | String |
+| Course_coordinator | Simple | Single-valued | String | #TODO: From reference?
 | Number_of_Students | Derived<br>(from Student references) | Single-valued | int |
 
 - ### Paper
@@ -121,5 +140,35 @@ Using these assumptions, we can easily see that this miniworld has enough comple
   - DEPARTMENT is partial participation and COURSE is partial participation
   - A department may not represent a possible major for any course, and a course might not require its students to major in a subject
 
+- ### SUPERVISES(Staff, Student)
+  - M:N for Staff:Student
+  - Staff can supervise many students, and students can have multiple
+    supervisors.
+  - Both are partial
+  - Staff don’t always supervise students , and not all students need supervisors
 
+- ### LOCAL_TO(Staff, Campus)
+  - 1:N for Campus:Staff
+  - Staff are located on a campus, but one campus can have many staff
+  - Staff has total participation, Campus has partial participation
+  - Multiple staff may share the same campus, but they must have at least one campus.
 
+- ### COORDINATES(Staff, Course)
+  - 1:1 for Staff:Course
+  - A course must have one coordinator and staff can coordinate only one course
+  - Staff has partial participation, course has total participation
+
+## Teamwork Summary
+- ### Hayden McAlister
+  - Modeling of Building and Room, as well as associated Relationships
+  - Structuring of Report and DIA file
+  - Writeup of Building, Room, and associated relationships in report
+
+- ### Nat Moore
+  - Modeling of Department, Course, and associated relationships
+  - Addition of above working to report
+
+- ### Masaaki Fukushima
+- ### Jack Heikell 
+  - Modeling of Student, Staff, and associated relationships
+  - Addition of above working to report
