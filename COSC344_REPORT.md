@@ -26,8 +26,7 @@ Using these assumptions, we can easily see that this miniworld has enough comple
 | Course | Simple | Multi-valued | String | TODO: By reference?
 | Enrollment_Date | Simple, Not NULL | Single-valued | Date |
 | Graduate_Date | Simple | Single-valued | Date |
-| Graduated_bool | Derived<br>(From existence of Graduate_Date) | Single-valued
-| Boolean |
+| Graduated_bool | Derived<br>(From existence of Graduate_Date) | Single-valued | Boolean |
 
 - ### Staff
 | Attribute   | Simplicity  | Num-Values  | Data Type   |
@@ -118,9 +117,9 @@ Using these assumptions, we can easily see that this miniworld has enough comple
   - STAFF is total participation and DEPARTMENT is total participation; every staff member must work for at least one department, and every department must have  ≥ 1 staff member
 
 - ### OFFERS (Department, Paper)
- - 1:N for Department:Paper
- -  A department can offer multiple papers, but a paper can only be coordinated by one department
- - DEPARTMENT is total participation, and so too is PAPER; a department must offer papers, and a paper can only be offered by a department
+  - 1:N for Department:Paper
+  - A department can offer multiple papers, but a paper can only be coordinated by one department
+  - DEPARTMENT is total participation, and so too is PAPER; a department must offer papers, and a paper can only be offered by a department
 
 - ### ENROLLED_IN (Student, Course)
   - 2:N for Student:Course
