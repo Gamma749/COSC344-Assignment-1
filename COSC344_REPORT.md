@@ -35,19 +35,15 @@ Using these assumptions, we can easily see that this miniworld has enough comple
 | Name | Simple, Not NULL | Single-valued | String |
 | Phone | Simple | Single-valued | String |
 | Address | Composite<br>(Street Number: int[1,10000],<br>Street Name: Str, Suburb: Str) | Multi-valued | String |
-| Student_ID | Derived<br>(From Student Reference) | Single-value | Int | #TODO: From reference?
-| Departments | Derived<br>(From Department Reference) | Multi-valued | String | #TODO: From reference?
-| Papers | Simple | Derived<br>(From Papers Reference) | String |  #TODO: From reference?
 | Salary | Simple, Not NULL | Single-valued | Float |
 | IRD_Num | Simple, not NULL | Single-valued | Int |
-| Office | Simple | Derived<br>(From Room Reference) | String |  #TODO: From reference?
 
 - ### Department
 | Attribute   | Simplicity  | Num-Values  | Data Type   |
 | ----------- | ----------- | ----------- | ----------- |
 | Name | Simple | Single-valued | String (Key Attribute)|
-| Campus | Simple | Derived<br>(From Campus Reference) | String | #TODO: From Reference?
-| Number_of_Employees | Composite<br>(Number_of_lecturers: int,<br> Number_of_administrative_staff: int,<br> Number_of_tutors:int) | Single-valued | int |
+| Campus | Simple | Derived<br>(From Campus Reference) | String |
+| Number_of_Employees | Composite<br>(Number_of_academic_staff: int,<br> Number_of_nonacademic_staff: int) | Single-valued | int |
 | Number_of_Students | Derived<br>(from Student references) | Single-valued | int |
 | Address | Derived<br>(from Building references) | Multi-valued | String |
 
@@ -58,7 +54,6 @@ Using these assumptions, we can easily see that this miniworld has enough comple
 | Years_required | Simple | Single-valued | int |
 | Undergraduate | Simple | Single-valued | boolean |
 | Postgraduate | Simple | Single-valued | boolean |
-| Course_coordinator | Derived<br>(From Staff Reference) | Single-valued | String | #TODO: From reference?
 | Number_of_Students | Derived<br>(from Student references) | Single-valued | int |
 
 - ### Paper
